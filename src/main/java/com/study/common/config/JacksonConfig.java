@@ -15,10 +15,15 @@ public class JacksonConfig {
     @Primary
     @Bean
     public ObjectMapper objectMapper() {
-        return customObjectMapper();
+        return objectMapper;
     }
 
-    private static ObjectMapper customObjectMapper() {
+    @Bean
+    public ObjectMapper customObjectMapper() {
+        return generateCustomObjectMapper();
+    }
+
+    private static ObjectMapper generateCustomObjectMapper() {
         if (objectMapper == null) {
             objectMapper = JsonMapper.builder()
                     .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
