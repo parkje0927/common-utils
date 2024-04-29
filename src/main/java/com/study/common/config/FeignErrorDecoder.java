@@ -2,8 +2,8 @@ package com.study.common.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.study.common.exception.CommonException;
-import com.study.common.exception.ErrorCode;
-import com.study.common.exception.ErrorResponse;
+import com.study.common.exception.CommonErrorCode;
+import com.study.common.exception.CommonErrorResponse;
 import com.study.common.exception.FeignException;
 import feign.Response;
 import feign.codec.ErrorDecoder;
@@ -22,10 +22,10 @@ public class FeignErrorDecoder implements ErrorDecoder {
     @Override
     public Exception decode(String str, Response response) {
         try (InputStream responseBody = response.body().asInputStream()) {
-            ErrorResponse errorResponse = objectMapper.readValue(responseBody, ErrorResponse.class);
-            throw new FeignException(errorResponse);
+            CommonErrorResponse commonErrorResponse = objectMapper.readValue(responseBody, CommonErrorResponse.class);
+            throw new FeignException(commonErrorResponse);
         } catch (IOException e) {
-            return new CommonException(ErrorCode.TEST_EXCEPTION);
+            return new CommonException(CommonErrorCode.TEST_EXCEPTION);
         }
     }
 }

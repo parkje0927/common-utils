@@ -1,7 +1,7 @@
 package com.study.common.interceptor;
 
 import com.study.common.exception.CommonException;
-import com.study.common.exception.ErrorCode;
+import com.study.common.exception.CommonErrorCode;
 import com.study.common.holder.UserIdHolder;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,7 +17,7 @@ public class CustomHeaderInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String userId = request.getHeader(X_USER_ID);
         if (!StringUtils.hasText(userId)) {
-            throw new CommonException(ErrorCode.TEST_EXCEPTION);
+            throw new CommonException(CommonErrorCode.TEST_EXCEPTION);
         }
 
         UserIdHolder.setUserId(Long.valueOf(userId));

@@ -5,10 +5,10 @@ import lombok.Getter;
 @Getter
 public class FeignException extends RuntimeException {
 
-    private final transient ErrorResponse errorResponse;
+    private final transient CommonErrorResponse commonErrorResponse;
 
-    public FeignException(ErrorResponse errorResponse) {
-        super(errorResponse.message());
-        this.errorResponse = errorResponse;
+    public FeignException(CommonErrorResponse commonErrorResponse) {
+        super(commonErrorResponse.message());
+        this.commonErrorResponse = commonErrorResponse;
     }
 }
